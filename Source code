@@ -1,0 +1,47 @@
+import numpy as np, time, random, matplotlib.pyplot as plt
+x=[]
+y=[]
+y1=[]
+n=1
+for cnt in range(0,3):
+    f1=[]
+    f2=[]
+    n=n*10
+    x.append(n)
+    for i in range(0,n):
+        l1=[]
+        l2=[]
+        for z in range(0,n):
+            a=random.randint(-5,5)
+            l1.append(a)
+            l2.append(a)
+        f1.append(l1)
+        f2.append(l2)
+
+    s1=time.time()
+    result = [[sum(a * b for a, b in zip(f1_row, f2_col)) for f2_col in zip(*f2)] for f1_row in f1]
+    e1=time.time()
+    f_t1=e1-s1
+    y1.append(f_t1)
+
+    s=time.time()
+    ans=np.dot(f1,f2)
+    e=time.time()
+    f_t=e-s
+    y.append(f_t)
+
+
+plt.plot(x,y, label='numpy program')
+plt.plot(x,y1, label='normal program')
+
+plt.xlabel('matrix size(n)')
+plt.ylabel('time(seconds)')
+
+plt.title('Matrix Multiplication')
+
+plt.legend()
+
+plt.show()
+
+
+
